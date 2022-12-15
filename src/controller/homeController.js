@@ -13,4 +13,14 @@ let getDetailPage = async (req, res) => {
   // write logic it here
 };
 
-export { getHomePage, getDetailPage };
+const createNewUser = async (req, res) => {
+  // console.log("Check Request", req.body);
+  let { firstName, lastName, email, address } = req.body;
+  await pool.execute(
+    "INSERT INTO `user` (firstName,lastName,email,address) VALUES(?,?,?,?)",
+    [firstName, lastName, email, address]
+  );
+  return res.redirect("/");
+};
+
+export { getHomePage, getDetailPage, createNewUser };
