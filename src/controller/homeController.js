@@ -23,4 +23,10 @@ const createNewUser = async (req, res) => {
   return res.redirect("/");
 };
 
-export { getHomePage, getDetailPage, createNewUser };
+const deleteUser = async (req, res) => {
+  let { userId } = req.body;
+  await pool.execute("DELETE FROM `user` WHERE id=?", [userId]);
+  return res.redirect("/");
+};
+
+export { getHomePage, getDetailPage, createNewUser, deleteUser };
